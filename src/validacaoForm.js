@@ -70,7 +70,7 @@ function checkPwd(inputPwd, indexEmail) {
         return sweetAlertPwdIncorrect()
     } else {
         storageLocal(arrayId[indexEmail], arrayNames[indexEmail], arrayEmail[indexEmail], arraySenha[indexEmail]);
-        window.location = '../'
+        window.location = './'
     }
 }
 
