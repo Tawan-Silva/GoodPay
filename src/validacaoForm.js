@@ -70,8 +70,7 @@ function checkPwd(inputPwd, indexEmail) {
         return sweetAlertPwdIncorrect()
     } else {
         storageLocal(arrayId[indexEmail], arrayNames[indexEmail], arrayEmail[indexEmail], arraySenha[indexEmail]);
-        alert('Logado')
-        window.location = './app.html'
+        window.location = '../index.html'
     }
 }
 
@@ -177,6 +176,6 @@ function sweetAlertDenied() {
         icon: 'error',
         title: 'Usuário não logado',
         text: 'Para continuar entre com sua conta, ou se cadastre!',
-        footer: `<a href="./registro.html">Cadastrar</a>`
+        footer: `<a href="../pages/registro.html">Cadastrar</a>`
       }) 
 }
