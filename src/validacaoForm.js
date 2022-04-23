@@ -3,7 +3,6 @@ const offcanvasBackdrop = document.querySelector('.offcanvas-backdrop');
 const inputNumber = document.getElementById('inputNumber');
 const recaptureCalc = document.querySelector('.recapture');
 
-
 const userLogin = [
     {
         id: 1001,
@@ -32,6 +31,7 @@ recaptureCalc.innerHTML += `${numRandomTwo}`;
 
 let result = numRandomOne + numRandomTwo;
 console.log(result);
+
 // Genjutsu ArrayFormat
 let arrayNames = [];
 let arrayId = [];
