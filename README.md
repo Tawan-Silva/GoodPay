@@ -3,11 +3,11 @@
 
 
 #### Email e senha para logar
-Email: "tawan.tlsvem@gmail.com" 
-Senha: "cebola123" 
+Email: "tawantls@gmail.com" 
+Senha: "cebola" 
 
 Email: "vitoricoma@gmail.com"
 Senha:  "12345678"
 
 Email: "televisao@gmail.com"
-Senha: "televisao555"
+Senha: "televisao"
