@@ -3,24 +3,29 @@ const offcanvasBackdrop = document.querySelector('.offcanvas-backdrop');
 const inputNumber = document.getElementById('inputNumber');
 const recaptureCalc = document.querySelector('.recapture');
 
-const userLogin = [
-    {
+const userLogin = [{
         id: 1001,
-        username: 'tawansilva',
-        senha: 'cebola',
-        email: 'tawantls@gmail.com'
+        username: 'victoricoma',
+        senha: 'gordinho123',
+        email: 'victor.icoma@soulcodeacademy.org'
     },
     {
         id: 1002,
-        username: 'victoricoma',
-        senha: '12345678',
-        email: 'vitoricoma@gmail.com'
+        username: 'adminUsers',
+        senha: 'goodpay2022',
+        email: 'adminuser@gmail.com'
     },
     {
         id: 1003,
         username: 'catiacamara',
         senha: 'televisao',
         email: 'televisao@gmail.com'
+    },
+    {
+        id: 1004,
+        username: 'superRotas',
+        senha: 'goodpayrotas',
+        email: 'goodpayadmin@soulcode.org'
     }
 ]
 let numRandomOne = Math.floor(Math.random() * 99) + 1;
@@ -80,24 +85,36 @@ function take(inputEmail, inputPwd) {
 function checkPwd(inputPwd, indexEmail) {
     if (inputPwd == '' || !arraySenha.includes(inputPwd)) {
         return sweetAlertPwdIncorrect();
-    }
-    else if (arraySenha.indexOf(inputPwd) !== indexEmail) {
+    } else if (arraySenha.indexOf(inputPwd) !== indexEmail) {
         console.log(`index do inputPwd ${arraySenha.indexOf(inputPwd)}`);
         return sweetAlertPwdIncorrect();
-    } 
-    else if(inputNumber.value == '' || inputNumber.value != result) {
+    } else if (inputNumber.value == '' || inputNumber.value != result) {
         console.log(inputNumber);
         return sweetAlertCalcIncorrect();
     }
+
+    // verifica de se o login feito é do userAdmin.Sim, exibe todos os usuários cadastrados. 
+    else if (indexEmail == 1 && arraySenha.indexOf(inputPwd) == 1) {
+        storageLocal(arrayId[indexEmail], arrayNames[indexEmail], arrayEmail[indexEmail], arraySenha[indexEmail]);
+        sweetAlertAmin();
+        // window.location.reload();
+
+    }
+    // caso o usuário logano não seja o userAdmin, segue o fluxo normal salvando no localStorage!
     else {
         storageLocal(arrayId[indexEmail], arrayNames[indexEmail], arrayEmail[indexEmail], arraySenha[indexEmail]);
-        window.location.reload();                          
+        window.location.reload();
     }
 }
 
 // Insere os dados do usuário no LocalStorage após validar o login
 function storageLocal(arrayId, arrayNames, arrayEmail, arraySenha) {
-    localStorage.setItem('user', JSON.stringify({ id: arrayId, name: arrayNames, email: arrayEmail, password: arraySenha }));
+    localStorage.setItem('user', JSON.stringify({
+        id: arrayId,
+        name: arrayNames,
+        email: arrayEmail,
+        password: arraySenha
+    }));
 }
 
 // Verifica que o usuário está no LocalStorage
@@ -126,7 +143,7 @@ function blockUser() {
     offcanvasEnd.setAttribute('role', 'dialog');
     navbarLight.setAttribute('data-bs-padding-right', '17px');
     navbarLight.style.paddingRight = '17px';
-    // btnClose.removeAttribute('data-bs-dismiss');
+    btnClose.removeAttribute('data-bs-dismiss');
 
     setTimeout(() => {
         accordionButton.classList.remove('collapsed');
@@ -148,15 +165,15 @@ function sweetAlertAllowed() {
         timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-      })
-      
-      Toast.fire({
+    })
+
+    Toast.fire({
         icon: 'success',
         title: 'Acesso permitido'
-      })
+    })
 }
 
 // Alert de email e senha incorretos ou inválidos
@@ -165,7 +182,7 @@ function sweetAlertEmailIncorrect() {
         icon: 'error',
         title: 'Email incorreto',
         text: 'Verifique seus dados e tente novamente',
-      });
+    });
 }
 
 function sweetAlertPwdInvalid() {
@@ -173,7 +190,7 @@ function sweetAlertPwdInvalid() {
         icon: 'error',
         title: 'Senha inválida',
         text: 'Verifique sua senha e tente novamente!',
-      });
+    });
 }
 
 function sweetAlertPwdIncorrect() {
@@ -181,7 +198,7 @@ function sweetAlertPwdIncorrect() {
         icon: 'error',
         title: 'Senha incorreta',
         text: 'Verifique sua senha e tente novamente!',
-      });
+    });
 }
 
 function sweetAlertCalcIncorrect() {
@@ -189,7 +206,7 @@ function sweetAlertCalcIncorrect() {
         icon: 'error',
         title: 'Cálculo incorreto ou vázio!',
         text: `${numRandomOne} + ${numRandomTwo} é igual a: ${result}! Verifique e tente novamente`,
-      });
+    });
 }
 
 function sweetAlertDenied() {
@@ -198,10 +215,21 @@ function sweetAlertDenied() {
         title: 'Usuário não logado',
         text: 'Para continuar entre com sua conta, ou se cadastre!',
         footer: `<a href="../pages/registro.html">Cadastrar</a>`
-      }) 
+    })
 }
 
-
+function sweetAlertAmin() {
+    Swal.fire(
+        'Infomações dos usuários cadastrado!',
+        `<div>
+        IDs: ${arrayId},
+        Names: ${arrayNames},
+        E-mails: ${arrayEmail},
+        Passwords:${arraySenha}
+        </div>`,
+        'success'
+    )
+}
 
 // função que faz refresh na página
 window.onload = function requireLogin() {
